@@ -1,0 +1,13 @@
+ R←Test_UC_010(stopFlag batchFlag);⎕TRAP;res;res2;res3
+⍝ Execise ]ListObjects without any parameter
+ ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ res←⎕SE.UCMD']ListObjects'
+ →T.PassesIf 0<≢res
+ →T.PassesIf 2=⍴⍴res
+ →T.PassesIf'='∧.=' '~⍨∊{⍵[2;]}2⊃,res
+ →T.PassesIf'⎕NC' 'Name' 'Type'≡{⍵[1;]}2⊃,res
+
+ R←T._OK
+⍝Done

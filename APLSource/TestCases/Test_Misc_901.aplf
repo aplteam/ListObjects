@@ -1,0 +1,10 @@
+ R←Test_Misc_901(stopFlag batchFlag);⎕TRAP;res
+⍝ Execise History
+ ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ res←##.ListObjects.History
+ →T.PassesIf 2=≡res
+
+ R←T._OK
+⍝Done

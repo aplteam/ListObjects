@@ -1,0 +1,36 @@
+ r←Run y;execIn;nc;locals;nc;⎕ML;ncs;nms;buffer;ind;b
+⍝ Returns name class, name and type of all objects found in namespace from which this function was called (default).
+ :Access Public Shared
+ ⎕ML←3
+ y←⊆⍣((≡⍕¨y)∊0 1)⊢y
+ (execIn locals nc)←3↑y,(≢y)↓⍬ 0(⍳16)
+ nc←{0=≢⍵:⍳16 ⋄ ⍵}nc
+ r←execIn.{⎕IO←1 ⋄ {(⎕NC∘⊂¨⍵),[1.5]⍵}↓⎕NL ⍵}nc
+ r,←execIn{11::'' ⋄ ⍵ ⍺.⎕WG'Type'}¨r[;2]
+ ncs←2.1 2.2 2.3 2.6 3.1 3.2 3.3 3.6 4.1 4.2 8.6 9.1 9.2 9.4 9.5 9.6 9.7 1
+ nms←'Vars' 'Field' 'Property' 'External/Shared' 'Traditional Function' 'Direct Function' 'Derived/Primitive' 'External' 'Traditional Operator' 'Direct Operator' 'External' 'Namespace' 'Instance' 'Class' 'Interface' 'External Class' 'External Interface' 'Label'
+ buffer←nms[ncs⍳|r[;1]]
+ ind←⍸¯1=×r[;1]
+ buffer[ind]←buffer[ind],¨⊂' (inherited)'
+ r[;3]←r[;3]{(⍺≡⍵):⍺ ⋄ (0=≢⍺):⍵ ⋄ ⍺,' (',⍵,')'}¨buffer
+ :If ∨/b←9.1=r[;1]
+ :AndIf ∨/b←b\execIn{({' '~⍨¨(⊂⍕execIn),¨'.',¨⍵}r[⍸b;2])≢∘⍕¨execIn.⍎¨⍵}r[⍸b;2]
+     ind←⍸b
+     r[ind;3]←{'Ref to ',⍵}¨r[ind;3]
+ :EndIf
+ :If ∨/b←9.4=r[;1]
+ :AndIf ∨/b←b\execIn{({' '~⍨¨(⊂⍕execIn),¨'.',¨⍵}r[⍸b;2])≢∘⍕¨execIn.⍎¨⍵}r[⍸b;2]
+     ind←⍸b
+     r[ind;3]←{'Ref to ',⍵}¨r[ind;3]
+ :EndIf
+ :If ∨/b←9.5=r[;1]
+ :AndIf ∨/b←b\execIn{({' '~⍨¨(⊂⍕execIn),¨'.',¨⍵}r[⍸b;2])≢∘⍕¨execIn.⍎¨⍵}r[⍸b;2]
+     ind←⍸b
+     r[ind;3]←{'Ref to ',⍵}¨r[ind;3]
+ :EndIf
+ r[⍸r[;3]≡¨⊂'Instance';3]←⊂'Class Instance'
+ :If 0<≢r
+ :AndIf ~locals
+     r⌿⍨←{~∨/1⊃execIn.⎕STATE ⍵}¨r[;2]  ⍝ Suppress all names located at one stage or another
+ :EndIf
+⍝Done

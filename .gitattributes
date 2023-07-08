@@ -1,0 +1,7 @@
+# Auto detect text files (for EOL-auto conversion)
+* text=auto
+
+*.apl? linguist-language=apl
+*.dyapp linguist-language=apl
+*.dyalog linguist-language=apl
+*.dws linguist-language=apl
