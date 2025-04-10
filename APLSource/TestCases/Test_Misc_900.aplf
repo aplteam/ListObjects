@@ -1,10 +1,12 @@
- R←Test_Misc_900(stopFlag batchFlag);⎕TRAP;res
+ R←Test_Misc_900(stopFlag batchFlag);⎕TRAP;version
 ⍝ Execise Version
  ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- res←##.ListObjects.Version
- →T.PassesIf 3=≢res
+ version←##.ListObjects.Version
+ →T.PassesIf 1=≡version
+ →T.PassesIf' '=1↑0⍴version
+ →T.PassesIf∧/⎕D∊⍨{⍵↑⍨¯1+⌊/⍵⍳'-+'}version~' .'
 
  R←T._OK
 ⍝Done
