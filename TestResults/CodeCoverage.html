@@ -127,20 +127,20 @@ ul li, ol li {margin: 8pt 3pt;}
 <tr><th>Executed at</th><th>APLVersion</th><th>Memory (MB)</th></tr>
 </thead>
 <tbody>
-<tr><td>2023-07-08 09:54:40</td><td>Windows-64 ⋄ 18.2.47418.0 ⋄ W ⋄ Development ⋄ Unicode</td><td>54</td></tr>
+<tr><td>2025-04-10 12:33:12</td><td>Windows-64 ⋄ 19.0.51432.0 ⋄ W ⋄ Development ⋄ Unicode</td><td>112</td></tr>
 </tbody>
 </table>
-<p>Overall 90% of the testable code is covered.</p>
+<p>Overall 85% of the testable code is covered.</p>
 <p>(Comment lines, empty lines, all <code>:End</code>* lines etc. are ignored)</p>
-<p>1 of the fns/opr are 100% covered.</p>
+<p>0 of the fns/opr are 100% covered.</p>
 <div id="partly-covered" class="keep-together">
 <table id="percent">
 <thead>
 <tr><th style="text-align:left;">Function/Operator</th><th style="text-align:left;">Lines not executed</th><th style="text-align:left;">Coverage</th><th style="text-align:right;">≢</th></tr>
 </thead>
 <tbody>
-<tr><td><a href="#listing_1" title="Link to listing">#.ListObjects.ListObjects.Run</a></td><td>26, 27, 28</td><td>89</td><td>28</td></tr>
-<tr class="fullyCovered"><td><a href="#listing_2" title="Link to listing">#.ListObjects.ListObjects.Version</a></td><td></td><td>100</td><td>1</td></tr>
+<tr><td><a href="#listing_1" title="Link to listing">#.ListObjects.ListObjects.Version</a></td><td>4, 10</td><td>60</td><td>5</td></tr>
+<tr><td><a href="#listing_2" title="Link to listing">#.ListObjects.ListObjects.Run</a></td><td>26, 27, 28</td><td>89</td><td>28</td></tr>
 </tbody>
 </table>
 </div>
@@ -165,7 +165,7 @@ $(document).ready(function() {
         },      
         buttons: [
         {
-            text: "Partly covered (1)",
+            text: "Partly covered (2)",
             titleAttr: "50%",
             className: "active",
             action: function ( e, dt, node, config ) {
@@ -193,7 +193,7 @@ $(document).ready(function() {
             }
         },
         {
-            text: "Fully covered (1)",
+            text: "Fully covered (0)",
             titleAttr: "100%",
             className: "active",
             action: function ( e, dt, node, config ) {
@@ -238,7 +238,21 @@ $(document).ready(function() {
 } );    
 </script>
 <h2>Listings</h2>
-<code class="header" id="listing_1">#.ListObjects.ListObjects.Run &mdash; 89%<a class="float-right no-print no-underline top-links" href="#top" title="Go to the top of the document">&#8607;</a><a  class="float-right no-print no-underline top-links" href="#partly-covered" title="Go to the beginning of 'Partly-covered'">↑</a></code>
+<code class="header" id="listing_1">#.ListObjects.ListObjects.Version &mdash; 60%<a class="float-right no-print no-underline top-links" href="#top" title="Go to the top of the document">&#8607;</a><a  class="float-right no-print no-underline top-links" href="#partly-covered" title="Go to the beginning of 'Partly-covered'">↑</a></code>
+<div class="code-block"><code>  r←Version</code>
+<code> [1]  ⍝ Returns the version number from `TatinVars` if possible.</code>
+<code> [2]  ⍝ See also `History`</code>
+<code> [3]   :If 0&lt;⎕NC'TatinVars.CONFIG'</code>
+<code class="emphasize">→[4]       r←(⎕JSON⍠('Dialect' 'JSON5')⊢TatinVars.CONFIG).version</code>
+<code> [5]   :ElseIf 0&lt;##.⎕NC'TatinVars.CONFIG'</code>
+<code> [6]       r←(⎕JSON⍠('Dialect' 'JSON5')⊢##.TatinVars.CONFIG).version</code>
+<code> [7]   :Else</code>
+<code> [8]  ⍝ When a script was not loaded with Tatin, there will be no namespace `TatinVars`.</code>
+<code> [9]  ⍝ In such cases we cannot provide a version number, so we return just ''.</code>
+<code class="emphasize">→[10]      r←''</code>
+<code> [11]  :EndIf</code>
+</div>
+<code class="header" id="listing_2">#.ListObjects.ListObjects.Run &mdash; 89%<a class="float-right no-print no-underline top-links" href="#top" title="Go to the top of the document">&#8607;</a><a  class="float-right no-print no-underline top-links" href="#partly-covered" title="Go to the beginning of 'Partly-covered'">↑</a></code>
 <div class="code-block"><code>  r←Run y</code>
 <code> [1]  ⍝ Returns name class, name and type of all objects found in namespace from which this function was called (default).</code>
 <code> [2]   :Access Public Shared</code>
@@ -276,14 +290,9 @@ $(document).ready(function() {
 <code> [34]  :EndIf</code>
 <code> [35] ⍝Done</code>
 </div>
-<code class="header" id="listing_2">#.ListObjects.ListObjects.Version &mdash; 100%<a class="float-right no-print no-underline top-links" href="#top" title="Go to the top of the document">&#8607;</a><a  class="float-right no-print no-underline top-links" href="#partly-covered" title="Go to the beginning of 'Partly-covered'">↑</a></code>
-<div class="code-block"><code> r←Version</code>
-<code> [1]  ⍝ See also `History`</code>
-<code> [2]  r←'ListObjects' '1.0.0' '2023-07-08'</code>
-</div>
 <div id="footer">
 <hr>
-<p>Created by "CodeCoverage" version 0.10.3+52 from 2023-06-23</p>
+<p>Created by "CodeCoverage" version 0.10.7+52 from 2024-06-05</p>
 </div>
 
 </body>
